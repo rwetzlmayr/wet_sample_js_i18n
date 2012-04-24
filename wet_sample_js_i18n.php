@@ -17,11 +17,11 @@ class wet_sample_js_i18n
 
 		// Render as a JS collection
 		foreach($keys as $key) {
-			$out[] = "$key: \"".gTxt($key).'"';
+			$out[] = "\"$key\": \"".gTxt($key).'"';
 		}
 
 		// Add a manual entry because we can
-		$out[] = 'wet_foo: "Foo!"';
+		$out[] = '"wet_foo": "Foo!"';
 
 		$out = join(', '.n, $out);
 
