@@ -9,31 +9,30 @@ class wet_sample_js_i18n
 	function add_i18n_entries()
 	{
 		// Which strings do we need to push to the client?
-		$keys = array(
-			'save',
-			'publish',
-			'category1'
+
+		// single string
+		gTxtScript('404_not_found');
+		// array of strings
+		gTxtScript(array('form_submission_error', 'publish'));
+
+		// single string w/ one variable substitution
+		gTxtScript('file_updated', array('{name}' => 'readme.txt'));
+
+		// single string w/ two variable substitutions
+		gTxtScript('comment_received', array('{site}' => 'My Site', '{title}' => 'My First Post'));
+
+		// array of strings w/ matching array of variable substitutions
+		gTxtScript(
+			array(
+				'file_updated',
+				'password_changed_mailed'
+			),
+			array(
+				array('{name}' => 'readme.txt'),
+				array('{email}' => 'donald.swain@example.com'
+				)
+			)
 		);
-
-		// Render as a JS collection
-		foreach($keys as $key) {
-			$out[] = "\"$key\": \"".gTxt($key).'"';
-		}
-
-		// Add a manual entry because we can
-		$out[] = '"wet_foo": "Foo!"';
-
-		$out = join(', '.n, $out);
-
-		// Push to client
-		$js = <<<EOS
-			$(document).ready(function() {
-				$.extend(textpattern.textarray, {
-				{$out}
-				});
-			});
-EOS;
-		echo script_js($js);
 	}
 }
 
